@@ -43,3 +43,17 @@ class Admin(User):
         return self.__admin_access_level
 
 
+# проверка кода
+user1 = User(1, "Иван Иванов")
+user2 = User(2, "Петр Петров")
+user3 = Admin(3, "Жанна Смирнова")
+
+# список
+user_list = [user1, user2, user3]
+
+# добавление пользователя админом
+user4 = User(4, "Сергей Сергеев")
+user3.add_user(user_list, user4)
+
+# удаление пользователя админом
+user3.remove_user(user_list, user1)
