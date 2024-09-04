@@ -38,4 +38,8 @@ class Admin(User):
         else:
             print("У вас, коллега, недостаточно прав для добавления пользователя.")
 
+    # Переопределение метода для получения уровня доступа администратора
+    def get_access_level(self):
+        return self.__admin_access_level
+
 
