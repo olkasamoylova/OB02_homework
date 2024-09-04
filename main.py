@@ -21,39 +21,37 @@ class Admin(User):
 
     # Метод для добавления пользователя
     def add_user(self, user_list, user):
-        if self.get_access_level() == 'admin':
-            user_list.append(user)
-            print(f"Пользователь {user.get_name()} добавлен в систему.")
-        else:
-            print("У вас, коллега, недостаточно прав для добавления пользователя.")
+        user_list.append(user)
+        print(f"Пользователь {user.get_name()} добавлен в систему.")
 
     # Метод для удаления пользователя
     def remove_user(self, user_list, user):
-        if self.get_access_level() == 'admin':
-            if user in user_list:
-                user_list.remove(user)
-                print(f"Пользователь {user.get_name()} удален из системы.")
-            else:
-                print("Пользователь не найден в системе.")
+        if user in user_list:
+            user_list.remove(user)
+            print(f"Пользователь {user.get_name()} удален из системы.")
         else:
-            print("У вас, коллега, недостаточно прав для добавления пользователя.")
+            print("Пользователь не найден в системе.")
 
-    # Переопределение метода для получения уровня доступа администратора
+# переопределение метода для получения уровня доступа администратора, а то все время указывается user
     def get_access_level(self):
-        return self.__admin_access_level
-
+        return 'admin'
 
 # проверка кода
 user1 = User(1, "Иван Иванов")
 user2 = User(2, "Петр Петров")
-user3 = Admin(3, "Жанна Смирнова")
+admin = Admin(3, "Жанна Смирнова")
 
 # список
-user_list = [user1, user2, user3]
+user_list = [user1, user2, admin]
 
 # добавление пользователя админом
 user4 = User(4, "Сергей Сергеев")
-user3.add_user(user_list, user4)
+admin.add_user(user_list, user4)
 
 # удаление пользователя админом
-user3.remove_user(user_list, user1)
+admin.remove_user(user_list, user1)
+
+# проверка работы методов
+print(user1.get_name())
+print(admin.get_access_level())
+
